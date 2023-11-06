@@ -5,6 +5,26 @@
 	<title>Tugas CRUD Kampus Medeka</title>
 </head>
 <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('input').on('input', function () {
+                var allFilled = true;
+                $('input').each(function () {
+                    if ($(this).val() === '') {
+                        allFilled = false;
+                        return false; // Exit the loop if any field is empty
+                    }
+                });
+
+                if (allFilled == true) {
+                    $('#submitBtn').prop('disabled', false);
+                } else {
+                    $('#submitBtn').prop('disabled', true);
+                }
+            });
+        });
+    </script>
 
 <body>
 	<div class="container col-md-6 mt-4">
@@ -26,14 +46,14 @@
 
 					<div class="form-group">
 						<label>Deskripsi</label>
-						<textarea class="form-control" name="deskripsi"></textarea>
+						<input class="form-control" name="deskripsi">
 					</div>
 					<div class="form-group">
 						<label>Stok/Barang Tersedia</label>
-						<textarea class="form-control" name="stok"></textarea>
+						<input class="form-control" name="stok">
 					</div>
 
-					<button type="submit" class="btn btn-primary" name="submit" value="simpan">Simpan data</button>
+					<button id ="submitBtn" type="submit" class="btn btn-primary" name="submit" value="simpan">Simpan data</button>
 				</form>
 
 				<?php
@@ -41,6 +61,7 @@
 				
 				//melakukan pengecekan jika button submit diklik maka akan menjalankan perintah simpan dibawah ini
 				if (isset($_POST['submit'])) {
+					
 					//menampung data dari inputan
 					$nama = $_POST['nama'];
 					$harga = $_POST['harga'];
